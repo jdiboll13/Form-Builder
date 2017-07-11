@@ -97,4 +97,43 @@ let formData = [
 
 // -------- Your Code Goes Below this Line --------
 
+var createInput;
+var createSelect;
 
+
+formData.forEach(function(formData){
+  createInput = document.createElement('input');
+  if (formData.type === 'select'){
+    createSelect = document.createElement('select');
+    createSelect.type = formData['type'];
+    formData.options.forEach(function(options, index){
+      console.log(formData.options);
+      var opt = document.createElement('option');
+      opt.value = formData.options[index]['value'];
+      opt.text = formData.options[index]['label'];
+      createSelect.appendChild(opt);
+
+    })
+    createSelect.placeholder = formData['label'];
+    createSelect.id = formData['id'];
+    createSelect.icon = formData['icon'];
+    createSelect.options = formData['options'];
+    fields.appendChild(createSelect);
+    var op2 = document.createElement('option')
+    op2.text = "Select language...";
+    op2.selected = 'selected';
+    createSelect.appendChild(op2);
+  }
+  else {
+    createInput = document.createElement('input');
+    createInput.type = formData['type'];
+    createInput.placeholder = formData['label'];
+    createInput.id = formData['id'];
+    createInput.icon = formData['icon'];
+    createInput.options = formData['options'];
+    fields.appendChild(createInput);
+  }
+  if (formData['type'] === 'textarea') {
+      createInput.style.height = "100px";
+    }
+})
